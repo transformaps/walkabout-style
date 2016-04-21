@@ -756,11 +756,56 @@ styles:
     lines_transparent:
         base: lines
         blend: overlay
-
+    ui-lines-overlay:
+        base: lines
+        blend: overlay
+        blend_order: 0
+    ui-location-gem-overlay:
+        base: points
+        texture: pois
+        interactive: true
+        blend: overlay
+        blend_order: 2
+    ui-icons-overlay:
+        base: points
+        texture: pois
+        interactive: true
+        blend: overlay
+        blend_order: 3
 
 layers:
 
-
+    # Map overlays for styling the server response (using special source layer names) for route line, find_me location gem, and search result pins
+    route:
+        data: { source: route }
+        draw:
+            ui-lines-overlay:
+                color: '#06a6d4'
+                order: 500
+                width: [[0,3.5px],[5,5px],[9,7px],[10,6px],[11,6px],[13,8px],[14,9px],[15,10px],[16,11px],[17,12px],[18,10px]]
+    current_location_gem:
+        data: { source: find_me }
+        draw:
+            ui-location-gem-overlay:
+                interactive: true
+                sprite: current-location
+                size: 36px
+                collide: false
+                transition:
+                    [show, hide]:
+                        time: 0s
+    reverse_geocode:
+        data: { source: reverse_geocode }
+        draw:
+            ui-icons-overlay:
+                interactive: true
+                sprite: search-active
+                size: [36px,54px]
+                collide: false
+                anchor: top
+                transition:
+                    [show, hide]:
+                        time: 0s
 
     earth:
         data: { source: mapzen}
